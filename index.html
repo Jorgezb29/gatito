@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cat Love by AlexDev</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<article role="img" aria-labelledby="alt">
+  <div id="alt">Cartoon of a black cat drawn in cute/kawaii style</div>
+  <div class="shadow"></div>
+  <div class="tail"></div>
+  <div class="body">
+    <div class="leg"></div>
+    <div class="leg"></div>
+    <div class="paw"></div>
+    <div class="paw"></div>
+  </div>
+  <div class="ear"></div>
+  <div class="ear"></div>
+  <div class="head">
+    <div class="whisker"></div>
+    <div class="whisker"></div>
+    <div class="whisker"></div>
+    <div class="whisker"></div>
+    <div class="eye"></div>
+    <div class="eye"></div>
+    <div class="nose"></div>
+  </div>
+</article>
+
+<script>
+    const messages = [
+        'Te amo',
+        'Eres preciosa',
+        'Me encantas',
+        'Amor de mi vida',
+        'Mi princesa',
+        'Te Adoro Mi Jaqui',
+        'Siempre te voy a querer',
+        'Siempre estas en mi corazón'
+    ];
+
+    function createBubbleMessage() {
+        const messageEl = document.createElement('div');
+        messageEl.classList.add('floating-message');
+        
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        messageEl.textContent = randomMessage;
+
+        const angle = Math.random() * 2 * Math.PI; 
+        const distance = Math.random() * 150 + 100; 
+
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance;
+
+        messageEl.style.setProperty('--end-x', `${endX}px`);
+        messageEl.style.setProperty('--end-y', `${endY}px`);
+
+        document.body.appendChild(messageEl);
+
+        messageEl.addEventListener('animationend', () => {
+            messageEl.remove();
+        });
+    }
+
+    setInterval(createBubbleMessage, 300);
+</script>
+
+<script>
+    const catArticle = document.querySelector('article');
+    const paws = document.querySelectorAll('.paw');
+
+    const originalColors = {
+        fur: '#222',
+        furDark: '#111',
+        skin: 'pink',
+        pawBorder: '#fff' 
+    };
+
+    const kawaiiColors = {
+        fur: '#fdfdfd',
+        furDark: '#ffd1dc',
+        skin: '#ff99b5',
+        pawBorder: '#000'
+    };
+
+    let isKawaii = false;
+
+    setInterval(() => {
+        isKawaii = !isKawaii;
+        const colorsToApply = isKawaii ? kawaiiColors : originalColors;
+
+        catArticle.style.setProperty('--fur', colorsToApply.fur);
+        catArticle.style.setProperty('--fur-dark', colorsToApply.furDark);
+        catArticle.style.setProperty('--skin', colorsToApply.skin);
+
+        paws.forEach(paw => {
+            paw.style.borderColor = colorsToApply.pawBorder;
+            paw.style.borderBottomColor = colorsToApply.pawBorder;
+        });
+
+    }, 5000); 
+</script>
+  
+</body>
+
+ <!-- 
+
+Contáctame:
+
+    * Invitame un café
+ https://buymeacoffee.com/alexx.dev
+
+    * Portafolio Web
+ https://alexxdev.vercel.app
+
+    * Sigueme en tiktok
+ https://www.tiktok.com/@alexx.dev?is_from_webapp=1&sender_device=pc 
+ 
+    *Canal de WhatsApp
+ https://whatsapp.com/channel/0029VazQEXq90x2vIdNkrH1p
+
+-->
+</html>

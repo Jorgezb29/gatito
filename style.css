@@ -1,0 +1,254 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #fec
+}
+
+article {
+  --fur: #222;
+  --fur-dark: #111;
+  --skin: pink;
+  font-size: 0.6vmin;
+  width: 80em;
+  aspect-ratio: 1;
+  position: relative;
+  animation: breathing 4s ease-in-out infinite;
+  transition: --fur 0.8s, --fur-dark 0.8s, --skin 0.8s;
+  
+  *, *::before, *::after {
+    position: absolute;
+    box-sizing: border-box;
+  }
+  
+  #alt {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  
+  .shadow {
+    width: 80%;
+    height: 5%;
+    background: #0002;
+    border-radius: 50% / 0 0 100% 100%;
+    top: 99%;
+    left: 50%;
+    translate: -50%;
+  }
+  
+  .tail {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    border: 7em solid #0000;
+    border-top-color: var(--fur-dark);
+    border-left-color: var(--fur-dark);
+    clip-path: polygon(100% 0, 100% 100%, 0 30%, 0 0);
+    top: 75%;
+    left: 52%;
+    transform-origin: bottom left;
+    animation: tail-wag 3s ease-in-out infinite;
+    
+    &::before {
+      content: "";
+      width: 7em;
+      aspect-ratio: 1;
+      background: var(--fur-dark);
+      border-radius: 50%;
+      left: 81%;
+      top: -9%;
+    }
+  }
+  
+  .body {
+    left: 50%;
+    translate: -50%;
+    bottom: 0;
+    width: 35%;
+    height: 40%;
+    background: 
+      radial-gradient(100% 80% at 50% 0, var(--fur-dark) 50%, #0000 0),
+      var(--fur);
+    border-radius: 100% / 200% 200% 20% 20%;
+    
+    .leg {
+      width: 165%;
+      height:38%;
+      background: var(--fur);
+      bottom: 0;
+      left:50%;
+      translate: -50%;
+      border-radius: 8em 8em 100% 100% / 10em 10em 16em 16em;
+      scale: 1 -1;
+    }
+    
+    .paw {
+      width: 35%;
+      height: 49%;
+      border: 0.75em solid #fff;
+      border-top: 0;
+      border-radius: 0 0 5em 5em;
+      border-bottom: 1em solid #fff;
+      top: 48%;
+      rotatE: -10deg;
+      left: 10%;
+      clip-path: polygon(0 20%, 100% 30%, 100% 100%, 0 100%);
+      transition: border-color 0.8s;
+      
+      & + & {
+        right: 7%;
+        height: 50%;
+        left: auto;
+        rotate: 13deg;
+        scale: -1 1;
+        clip-path: polygon(0 25%, 100% 15%, 100% 100%, 0 100%);
+      }
+    }
+  }
+  
+  .ear {
+    width: 40%;
+    aspect-ratio: 1;
+    border: 4em solid var(--fur);
+    border-radius: 5% 90% 10% 80%;
+    background: var(--skin);
+    transform-origin: bottom center;
+    animation: ear-twitch 5s ease-in-out infinite;
+    
+    & + & {
+      scale: -1 1;
+      right: 0;
+      animation-delay: 0.25s;
+    }
+  }
+  
+  .head {
+    width: 80%;
+    aspect-ratio: 1.1;
+    background: 
+      linear-gradient(#0003, #0000 50%),
+      var(--fur);
+    left: 50%;
+    translate: -50%;
+    border-radius: 100% / 125% 125% 80% 75%;
+    
+    .whisker {
+      width: 30%;
+      height: 30%;
+      border-radius: 50%;
+      border: 2em solid #0000; 
+      border-top-color: #000;   
+      border-left-color: #000;  
+      clip-path: polygon(100% 0, 100% 100%, 0 30%, 0 0);
+      
+      &:nth-child(1) {
+        top: 70%;
+        translate: -65%;
+      }
+      &:nth-child(2) {
+        top: 80%;
+        translate: -40%;
+        rotate: -20deg
+      }
+      
+      &:nth-child(3) {
+        right: 0%;
+        top: 70%;
+        translate: 65%;
+        rotate: 10deg;
+      }
+      &:nth-child(4) {
+        right: 0;
+        top: 80%;
+        translate: 40%;
+        rotate: 24deg
+      }
+    }
+    
+    .nose {
+      width: 10%;
+      height: 7%;
+      background: var(--skin);
+      border-radius: 50%;
+      top: 75%;
+      left: 50%;
+      translate: -50% -50%;
+      top: 78%;
+    }
+    
+    .eye {
+      --pos: 25%;
+      --x1: 50%;
+      --x2: 42%;
+      width: 35%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: 
+        radial-gradient(50% 50% at var(--x1) 47%, #fff 25%, #0000 0),
+        radial-gradient(50% 50% at var(--x2) 65%, #fff 12%, #0000 0),
+        radial-gradient(circle at 60% 55%, #000 35%, #0000 0),
+        white;
+      top: 60%;
+      left: var(--pos);
+      translate: -50% -50%;
+      top: 63%;
+      transform-origin: center;
+      animation: blink 6s linear infinite;
+      
+      & + & {
+        --x1: 70%;
+        --x2: 78%;
+        left: calc(100% - var(--pos));
+        scale: -1 1;
+      }
+    }
+  }
+}
+
+@keyframes breathing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+@keyframes tail-wag {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-10deg); }
+}
+@keyframes ear-twitch {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes blink {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97.5% { transform: scaleY(0.1); }
+}
+
+.floating-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: black;
+    color: white;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+    --end-x: 0px;
+    --end-y: 0px;
+    animation: fly-out 6s ease-out forwards;
+}
+@keyframes fly-out {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(1);
+    opacity: 0;
+  }
+}
